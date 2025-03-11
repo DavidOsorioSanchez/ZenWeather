@@ -47,10 +47,16 @@ export class ApiRequestService {
             
   constructor(private http: HttpClient) { }
 
-  // estos son los metodos http de la API de OpenWeather
-  GetWeatherData(Location: string): Observable<any> {
-    return this.http.get(`http://api.worldweatheronline.com/premium/v1/weather.ashx?key=${environment.APPID_WEATHER}&q=${Location}&format=json`)
+  // estos son los metodos http de la API de worldweather
+  GetWeatherData(ciudad: string | undefined): Observable<any> {
+    return this.http.get(`http://api.worldweatheronline.com/premium/v1/weather.ashx?key=${environment.APPID_WEATHER}&q=${ciudad}&format=json`);
   }
+
+  // estos son los metodos http de la API de googlemaps
+
+  // GetDirections(latitud: number, longitud: number): Observable<any> {
+  //   return this.http.get(`https://maps.googleapis.com/maps/api/geocode/json?lat=${latitud}&lng=${longitud}`);
+  // }
 
   // estos son los  metodos http de usuario
   GetUserData(idUsuario: number): Observable<UserData> {
