@@ -43,8 +43,7 @@ export class ApiRequestService {
   // }
 
   private baseUrlUser =  environment.API_USER;
-  // this.http.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${latitud}&lon=${longitud}&exclude={part}&appid=${environment.APPID_WEATHER}`)
-            
+  
   constructor(private http: HttpClient) { }
 
   // estos son los metodos http de la API de 7timer
