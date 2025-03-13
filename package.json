@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "output": "[my-framework] build --output public",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:ZenWeather": "node dist/zen-weather/server/server.mjs"
