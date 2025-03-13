@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { environment } from '../../environments/environment';
 
 
 interface UserData {
@@ -42,7 +42,7 @@ export class ApiRequestService {
   //   }
   // }
 
-  private baseUrlUser =  process.env['URL_USER'];
+  private baseUrlUser =  environment.API_USER;
   // this.http.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${latitud}&lon=${longitud}&exclude={part}&appid=${environment.APPID_WEATHER}`)
             
   constructor(private http: HttpClient) { }
