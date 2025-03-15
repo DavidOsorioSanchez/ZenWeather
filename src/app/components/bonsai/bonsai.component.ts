@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
+import { WeatherData } from '../../util/interface';
 
 @Component({
   selector: 'app-bonsai',
@@ -7,5 +8,15 @@ import { Component } from '@angular/core';
   styleUrl: './bonsai.component.css'
 })
 export class BonsaiComponent {
+  @Input() datos: WeatherData | undefined;
 
+  temperatures: number[] = [];
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['datos'] && this.datos) {
+      this.temperatures = this.datos.hourly.temperature_2m;
+    }else{
+      this.temperatures = [0];
+    }
+  }
 }

@@ -1,61 +1,76 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ApiRequestService } from './service/api-request.service';
+import { BonsaiComponent } from './components/bonsai/bonsai.component';
+import { ApiWeatherService } from './service/api/api-weather.service';
+import { WeatherData } from './util/interface';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, BonsaiComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'ZenWeather';
 
-  latitud: number | undefined;
-  longitud: number | undefined;
-  cordenada: string | undefined;
-  error: string | undefined;
-  datos: any;
+  
+  public latitud: number | undefined;
+  public longitud: number | undefined;
+  temperatures: number[] | undefined;
+  datos: WeatherData | undefined;
+  error: any;
 
-  // @ViewChild(ModalComponent) modal: ModalComponent | undefined;
-
-
-  // esta funcion comprueba si hay datos en localStorage
-
-
-  // datos de la API de OpenWeather
-  constructor(private apiRequestService: ApiRequestService) { }
-
+  constructor(private apiWeatherService: ApiWeatherService) { }
 
   ngOnInit() {
+    this.getUserLocation();
+  }
 
+  getUserLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (posicion) => {
           this.latitud = posicion.coords.latitude;
-          this.longitud = posicion.coords.longitude;
-          console.log('Latitud:', this.latitud);
-          console.log('Longitud:', this.longitud);
-          
+          this.longitud = posicion.coords.longitude;     
+          console.log('latitude:', this.latitud);
+          console.log('longitude:', this.longitud);
+          this.getWeatherData();
         },(error) => {
           this.error = error.message;
         }
-    );}
-  
-    if (this.latitud !== undefined && this.longitud !== undefined) {
-      this.apiRequestService.GetWeatherData(this.latitud, this.longitud ).subscribe(
-        (response) => {
-          console.log('Weather data:', response);
-          this.datos = response;
+    );}else {
+      this.error = 'Geolocalización no soportada';
+    }
+  }
+
+  getWeatherData() {
+    if (this.latitud !== undefined || this.longitud !== undefined) {
+      this.apiWeatherService.GetBonsaiData(this.latitud, this.longitud ).subscribe(
+        (response: Object) => {
+          console.log('bonsai data:', response);
+          this.datos = response as WeatherData;
         },
-        (error) => {
-          console.error('Error fetching weather data:', error);
+        (error : GeolocationPositionError) => {
+          this.handleGeolocationError(error as GeolocationPositionError);
         }
       );
-    } if (this.latitud === undefined) {
-      console.error('Latitud is undefined');
-    } if (this.longitud === undefined) {
-      console.error('Longitud is undefined');
+    } else {
+      console.error('Geolocalización no soportada');
     }
+  }
+  
+  handleGeolocationError(error: GeolocationPositionError) {
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+        this.error = 'User denied the request for Geolocation.';
+        break;
+      case error.POSITION_UNAVAILABLE:
+        this.error = 'Location information is unavailable.';
+        break;
+      case error.TIMEOUT:
+        this.error = 'The request to get user location timed out.';
+        break;
+    }
+    console.error('Geolocation error:', this.error);
   }
 }
