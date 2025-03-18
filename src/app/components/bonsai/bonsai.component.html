@@ -1,12 +1,12 @@
-<article class="flex flex-col gap-5 justify-center items-center w-auto h-auto">
-    <h2 class="text-xl font-bold text-center text-white" >
-        {{ temperatures[0] }} ºC
+<article class="flex flex-col gap-5 justify-center items-center"  >
+    <h2 [class]='(isDay === 1 ? "text-gray-900" : "text-gray-100") + " text-xl font-semibold text-center"' >
+        {{ temperatures[hora] }} ºC
+        {{ wind_speed_10m }} {{ wind_speed_10m_unit }}
     </h2>
-    <svg viewBox="0 0 340 340" id="icons" xmlns="http://www.w3.org/2000/svg" fill="#000000" class="aspect-square object-cover w-10/12 h-auto">
+    <svg viewBox="0 0 340 340" id="bonsai" xmlns="http://www.w3.org/2000/svg" fill="#000000" class="aspect-square object-cover w-full h-auto">
         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
         <g id="SVGRepo_iconCarrier">
-            <title></title>
             <path
                 d="M78.425,167.767H99.988s7.464,36.906,47.272,35.662,42.492-2.074,42.492-2.074l-13.05,25.3S95.841,244.066,78.425,167.767Z"
                 style="fill:#473b37"></path>
