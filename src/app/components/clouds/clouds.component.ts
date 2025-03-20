@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-clouds',
@@ -7,27 +7,67 @@ import { Component, ElementRef, Input, ViewChild } from '@angular/core';
   styleUrl: './clouds.component.css'
 })
 export class CloudsComponent {
-  // @Input () lluvia: number = 0;
+  constructor(private renderer: Renderer2, private el: ElementRef) {}
 
-  @ViewChild('startRain', { static: true }) startRain: ElementRef | undefined;
+  @Input () weather_code: number = 0;
+  @Input () nieve: number = 0;
+  @Input () lluvia: number = 0;
+  
+  @ViewChild('startWeatherAnimation', { static: true }) startWeatherAnimation: ElementRef | undefined;
+  @ViewChild('clouds', { static: true }) clouds: ElementRef | undefined;
+
+  
 
   ngAfterViewInit() {
-    this.animacionLluvia();
+    if(this.lluvia > 0) {
+      this.animacionLluvia();
+    }
+
+    if(this.nieve > 0) {
+      this.animacionNieve();
+    }
   }
+
+
   
+  animacionNieve() {
+    if (typeof document !== 'undefined') {
+      setInterval(() => {
+        this.snow();
+      }, 2000);
+    }
+  }
+
+  snow() {
+
+  }
+
   animacionLluvia() {
+    if(this.weather_code === 95){
+      if(this.clouds){
+        this.renderer.addClass(this.clouds.nativeElement, 'thunderStatus');
+      }
+    }
+
     if (typeof document !== 'undefined') {
       setInterval(() => {
         this.rain();
-      }, 6000);
+      }, 200);
     }
   }
 
   rain() {
-    if (this.startRain) {
-      const e = document.createElement('div');
-      e.classList.add('drop ');
-      this.startRain.nativeElement.appendChild(e);
+    if (this.startWeatherAnimation) {
+      const drop = this.renderer.createElement('div');
+      this.renderer.addClass(drop, 'drop');
+      this.renderer.setStyle(drop, 'left', Math.floor(Math.random() * 160) + 'px');
+      this.renderer.appendChild(this.startWeatherAnimation.nativeElement, drop)
+
+      setTimeout(() =>{
+        if (this.startWeatherAnimation) {
+          this.startWeatherAnimation.nativeElement.removeChild(drop);
+        }
+      }, 2000);
     }
   }
 }

@@ -4,12 +4,16 @@ import { BonsaiComponent } from './components/bonsai/bonsai.component';
 import { CloudsComponent } from './components/clouds/clouds.component';
 import { ApiWeatherService } from './service/api/api-weather.service';
 import { WeatherData } from '../util/interface';
+import { CommonModule } from '@angular/common';
+import { mainlyUseCloudConditional } from '../util/magicValues';
+
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, BonsaiComponent, CloudsComponent],
+  // standalone: true,
+  imports: [RouterOutlet, BonsaiComponent, CloudsComponent, CommonModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'ZenWeather';
@@ -19,8 +23,10 @@ export class AppComponent {
   public longitud: number | undefined;
   temperatures: number[] | undefined;
   isDay: number = 0 | 1;
-  rain: number = 0 ;
   datos: WeatherData | undefined;
+  weather_code: number = 0;
+  rain : number = 0;
+  snow : number = 0;
   // background: string = "";
   error: any;
 
@@ -29,6 +35,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.getUserLocation();
+    
   }
 
   getUserLocation() {
@@ -53,8 +60,11 @@ export class AppComponent {
           console.log('bonsai data:', response);
           this.datos = response as WeatherData;
           this.isDay = this.datos.current.is_day;
+          this.weather_code = this.datos.current.weather_code;
           this.rain = this.datos.current.rain;
-          this.setBackground();
+          this.snow = this.datos.current.snowfall;
+
+          this.mainlyUseClouds();
         },
         (error : GeolocationPositionError) => {
           this.handleGeolocationError(error as GeolocationPositionError);
@@ -80,27 +90,14 @@ export class AppComponent {
     console.error('Geolocation error:', this.error);
   }
 
-  setBackground() {
-      // if (this.datos && this.datos.current.rain > 0 ) {
-      //   return this.background = "bg-rain";
-      // }
-      // else if (this.datos && this.datos.current.snowfall > 0) {
-      //   return this.background = "bg-snow";
-      // }
-      // else if (this.datos && this.datos.current.showers > 0 ){
-      //   return this.background = "bg-showers";
-      // }
-      // else if (this.datos && this.datos.current.rain <= 0 && this.datos.current.snowfall <= 0 && this.datos.current.showers <= 0){
-      //   return this.background = "bg-none";
-      // } else {
-      //   this.background = "bg-none";
-      //   return console.error('No se ha encontrado ninguna condición para establecer el fondo del componente');
-      // }
-      if (this.datos && this.datos.current.rain > 0) {
-        // this.animacionLluvia();
-      }
-      
-  }
-
   
+
+  mainlyUseClouds() {
+      for(let i = 0; i < mainlyUseCloudConditional.length; i++) {
+        if(this.weather_code === mainlyUseCloudConditional[i]){
+          return true;
+        } 
+      }
+      return false;
+  }
 }

@@ -1,7 +1,13 @@
 
 <!-- este es el efecto de lluvia -->
-<section class="absolute z-50 top-0 left-0 w-full h-full flex justify-center items-start" >
-    <app-clouds></app-clouds>
+<section *ngIf="mainlyUseClouds()" class="absolute z-50 top-0 left-0 w-full h-full flex justify-center items-start">
+    <app-clouds 
+        [weather_code]='this.weather_code' 
+        [lluvia]='this.rain' 
+        [nieve]='this.snow'
+    >
+
+    </app-clouds>
 </section>
 
 <main [class]='(isDay === 1 ? "bg-gray-100" : "bg-gray-900") + " w-full min-h-screen flex justify-center items-end py-6"'  >
