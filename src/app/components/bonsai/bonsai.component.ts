@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges, ViewChild, ElementRef, } from '@angular/core';
+import { Component, Input, SimpleChanges, ViewChild, ElementRef, Renderer2, } from '@angular/core';
 import { WeatherData } from '../../../util/interface';
 
 @Component({
@@ -8,6 +8,10 @@ import { WeatherData } from '../../../util/interface';
   styleUrl: './bonsai.component.css'
 })
 export class BonsaiComponent {
+  constructor(private renderer: Renderer2) { }
+
+  @ViewChild('leaf', { static: true }) leaf: ElementRef | undefined;
+
   @Input() datos: WeatherData | undefined;
   @Input() identificador: any;
 
@@ -17,11 +21,11 @@ export class BonsaiComponent {
   wind_speed_10m: number = 0;
   wind_speed_10m_unit: string = "km/h";
 
-  
+
   ngOnInit() {
     this.getHour();
-    
-    // this.animacionDeHojas();
+
+    this.animacionDeHojas();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -38,8 +42,27 @@ export class BonsaiComponent {
     this.hora = ahora.getHours();
   }
 
-  
+  animacionDeHojas() {
+    if (typeof document !== 'undefined') {
+      setInterval(() => {
+        this.leafDown();
+      }, 3500);
+    }
+  }
 
+  leafDown() {
+    if (this.leaf) {
+      const leaf = this.renderer.createElement('div');
+      this.renderer.addClass(leaf, 'leafDown');
+      this.renderer.appendChild(this.leaf.nativeElement, leaf);
+      this.renderer.setStyle(leaf, 'left', Math.floor(Math.random() * 230) + 30 + 'px');
+      setTimeout(() =>{
+        if (this.leaf) {
+          this.leaf.nativeElement.removeChild(leaf);
+        }
+      }, 7000);
+    }
+  }
 }
 
 

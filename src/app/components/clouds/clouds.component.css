@@ -10,14 +10,14 @@ article .clouds {
     top: 100px;
     width: 160px;
     height: 50px;
-    background-color: #f5f5f5;
+    background-color: #cecece;
     border-radius: 100px;
-    filter: drop-shadow(8px 8px 0px #0005) drop-shadow(0 0 0 #f5f5f5);
+    filter: drop-shadow(8px 8px 0px #0005) drop-shadow(0 0 0 #dfdfdf);
     z-index: 1;
 }
 
 article .thunderStatus{
-    animation: thunders 6s steps(1) infinite;
+    animation: thunders 4s steps(1) infinite;
 }
 
 article .clouds::before {
@@ -28,15 +28,15 @@ article .clouds::before {
     width: 55px;
     height: 55px;
     border-radius: 50%;
-    background-color: #f5f5f5;
-    box-shadow: 45px -10px 0 15px #f5f5f5;
+    background-color: #cecece;
+    box-shadow: 45px -10px 0 15px #cecece;
 }
 
 article .clouds::after {
     content: "";
     position: absolute;
     inset: 0;
-    background-color: #f5f5f5;
+    background-color: #cecece;
     border-radius: 100px;
 }
 
@@ -71,9 +71,9 @@ article .drop {
 @keyframes thunders {
 
     0% {
-        filter: drop-shadow(8px 8px 0px #0005) drop-shadow(0 0 0 #f5f5f5) brightness(1);
+        filter: drop-shadow(8px 8px 0px #0005) drop-shadow(0 0 0 #cecece) brightness(1);
     }
     95% {
-        filter: drop-shadow(8px 8px 0px #0005) drop-shadow(0 0 50px #f5f5f5) brightness(10);
+        filter: drop-shadow(8px 8px 0px #0005) drop-shadow(0 0 50px #cecece) brightness(10);
     }
 }

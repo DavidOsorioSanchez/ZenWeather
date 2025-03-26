@@ -10,7 +10,7 @@ export const mainlyUseCloudConditional : Array<number> = [
     /* nevada fuerte  */ 86,
     /* lluvia con truenos leve o moderado */ 95,
     /* truenos con granizo leve */ 96,
-    /* truenos ccon granizo fuerte */ 99,
+    /* truenos con granizo fuerte */ 99,
 ]
 
 

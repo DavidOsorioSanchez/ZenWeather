@@ -7,11 +7,12 @@ import { Component, ElementRef, Input, ViewChild, Renderer2 } from '@angular/cor
   styleUrl: './clouds.component.css'
 })
 export class CloudsComponent {
-  constructor(private renderer: Renderer2, private el: ElementRef) {}
+  constructor(private renderer: Renderer2) {}
 
   @Input () weather_code: number = 0;
   @Input () nieve: number = 0;
   @Input () lluvia: number = 0;
+  @Input () llovisna: number = 0;
   
   @ViewChild('startWeatherAnimation', { static: true }) startWeatherAnimation: ElementRef | undefined;
   @ViewChild('clouds', { static: true }) clouds: ElementRef | undefined;
@@ -19,7 +20,7 @@ export class CloudsComponent {
   
 
   ngAfterViewInit() {
-    if(this.lluvia > 0) {
+    if(this.lluvia > 0 || this.llovisna > 0) {
       this.animacionLluvia();
     }
 
@@ -43,9 +44,11 @@ export class CloudsComponent {
   }
 
   animacionLluvia() {
-    if(this.weather_code === 95){
+    if(this.weather_code === 95 || this.weather_code === 96 || this.weather_code === 99){
       if(this.clouds){
         this.renderer.addClass(this.clouds.nativeElement, 'thunderStatus');
+      }else{
+        console.error('clouds no encontrado');
       }
     }
 

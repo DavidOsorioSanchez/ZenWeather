@@ -20,4 +20,17 @@ describe('BonsaiComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // test propio
+  it('El valor de Calor debe ser menor que 70', () => {
+    fixture = TestBed.createComponent(BonsaiComponent);
+    component = fixture.componentInstance;
+    expect(component.temperatures).toBeLessThan(70);
+  });
+
+  it('El valor de isDay debe ser menor o igual a 1', () => {
+    fixture = TestBed.createComponent(BonsaiComponent);
+    component = fixture.componentInstance;
+    expect(component.isDay).toBeLessThanOrEqual(1);
+  });
 });

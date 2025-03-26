@@ -2,3 +2,43 @@
     margin: 0;
     padding: 0;
 }
+
+.leafDown{
+    position: absolute;
+    background-image: url('../../../../public/hoja.svg');
+    background-size: 12px 12px;
+    background-repeat: no-repeat;
+    border: none;
+    width: 12px !important;
+    height: 12px !important;
+    transform-origin: bottom;
+    z-index: 0;
+    /* transform: rotate(180deg) !important; */
+    animation: leaffall 7s linear 1;
+} 
+
+
+
+@keyframes leaffall {
+    0% {
+        top: 65px;
+        opacity: 1;
+        transform: rotate(180deg) ;
+    }
+
+
+    60% {
+        transform: rotate(100deg);
+    }
+
+    95%{
+        transform: scale(0.5);
+        opacity: 0.5;
+    }
+
+    100% {
+        top: 250px;
+        opacity: 0;
+        transform: rotate(180deg) scale(0);
+    }
+}

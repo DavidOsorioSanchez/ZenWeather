@@ -27,6 +27,7 @@ export class AppComponent {
   weather_code: number = 0;
   rain : number = 0;
   snow : number = 0;
+  showers: number = 0;
   // background: string = "";
   error: any;
 
@@ -45,10 +46,11 @@ export class AppComponent {
           this.latitud = posicion.coords.latitude;
           this.longitud = posicion.coords.longitude;     
           this.getWeatherData();
+          this.guardadoLocalstorage();
         },(error) => {
           this.error = error.message;
-        }
-    );}else {
+        });
+    }else {
       this.error = 'Geolocalización no soportada';
     }
   }
@@ -63,6 +65,7 @@ export class AppComponent {
           this.weather_code = this.datos.current.weather_code;
           this.rain = this.datos.current.rain;
           this.snow = this.datos.current.snowfall;
+          this.showers = this.datos.current.showers;
 
           this.mainlyUseClouds();
         },
@@ -72,6 +75,12 @@ export class AppComponent {
       );
     } else {
       console.error('Geolocalización no soportada');
+    }
+  }
+
+  guardadoLocalstorage(){
+    if (this.latitud !== undefined && this.longitud !== undefined) {
+      localStorage.setItem('lat&lon', JSON.stringify({lat: this.latitud, lon: this.longitud}));
     }
   }
   
@@ -90,7 +99,37 @@ export class AppComponent {
     console.error('Geolocation error:', this.error);
   }
 
-  
+  backgroundColor(){
+    if(this.isDay === 1){
+      if(this.weather_code === 0){
+        return "bg-[#00BFFF]";
+      } else if(this.weather_code === 1 || 2 || 66){
+        return "bg-[#89CFF0]";
+      } else if(this.weather_code === 3 || 4 || 67 || 80 || 81){
+        return "bg-[#A9A9A9]";
+      } else if( this.weather_code === 82 ){
+        return "bg-[#5238c2]";
+      } else if(this.weather_code === 85 || 86 ){
+        return "bg-[#dadada]";
+      } else if(this.weather_code === 95 || 96 || 99){
+        return "bg-gray-600";
+      }else return "bg-white";
+    } else {
+      return "bg-gray-700";
+    }
+    // nublado = 3,
+    // lluvia ligera = 66,
+    // lluvia fuerte = 67,
+    // nieve = 77,
+    // chuvasco leve = 80,
+    // chuvasco moderado = 81,
+    // chuvasco violento = 82,
+    // nevada ligera = 85,
+    // nevada fuerte  = 86,
+    // lluvia con truenos leve o moderado = 95,
+    // truenos con granizo leve = 96,
+    // truenos con granizo fuerte = 99,
+  }
 
   mainlyUseClouds() {
       for(let i = 0; i < mainlyUseCloudConditional.length; i++) {

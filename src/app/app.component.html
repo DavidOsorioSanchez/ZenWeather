@@ -5,12 +5,13 @@
         [weather_code]='this.weather_code' 
         [lluvia]='this.rain' 
         [nieve]='this.snow'
+        [llovisna]="this.showers"
     >
 
     </app-clouds>
 </section>
 
-<main [class]='(isDay === 1 ? "bg-gray-100" : "bg-gray-900") + " w-full min-h-screen flex justify-center items-end py-6"'  >
+<main [class]='backgroundColor() + " w-full min-h-screen flex justify-center items-end py-6"'  >
     <app-bonsai [datos]="datos" ></app-bonsai>
 </main>
 <router-outlet />
