@@ -6,6 +6,7 @@ import { ApiWeatherService } from './service/api/api-weather.service';
 import { WeatherData } from '../util/interface';
 import { CommonModule } from '@angular/common';
 import { mainlyUseCloudConditional } from '../util/magicValues';
+// import { MenuButtonComponent } from './components/menu-button/menu-button.component';
 
 
 @Component({

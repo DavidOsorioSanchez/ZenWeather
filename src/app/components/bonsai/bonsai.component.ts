@@ -13,7 +13,7 @@ export class BonsaiComponent {
   @ViewChild('leaf', { static: true }) leaf: ElementRef | undefined;
 
   @Input() datos: WeatherData | undefined;
-  @Input() identificador: any;
+  @Input() mainlyUseLeafAnimation: boolean = false;
 
   isDay: number = 0 | 1;
   hora: number = 0;
@@ -22,10 +22,9 @@ export class BonsaiComponent {
   wind_speed_10m_unit: string = "km/h";
 
 
-  ngOnInit() {
-    this.getHour();
 
-    this.animacionDeHojas();
+  ngOnInit() {
+    this.getHour();    
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -34,6 +33,15 @@ export class BonsaiComponent {
       this.wind_speed_10m = this.datos.current.wind_speed_10m;
       this.wind_speed_10m_unit = this.datos.current_units.wind_speed_10m;
       this.isDay = this.datos.current.is_day;
+
+      if(
+        this.wind_speed_10m >= 1.0 && 
+        this.datos.current.rain === 0 &&
+        this.datos.current.showers <= 1.0 && 
+        this.datos.current.snowfall === 0
+      ) {
+        this.animacionDeHojas();
+      }
     }
   }
 

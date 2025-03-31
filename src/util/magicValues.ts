@@ -13,4 +13,15 @@ export const mainlyUseCloudConditional : Array<number> = [
     /* truenos con granizo fuerte */ 99,
 ]
 
+export const mainlyUseThunderConditional : Array<number> = [
+    /* tormenta electrica generica */ 17,
+    /* tormenta electrica con polvo o arena (raramente usada) */ 29,
+    /* tormenta eléctrica con granizo moderado o fuerte */ 95,
+    /* tormenta eléctrica con granizo leve o moderado */ 96,
+    /* tormenta eléctrica con granizo fuerte */ 97,
+    /* tormenta eléctrica con huracanes o tornados */ 99,
+]
+
+
+
 

@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, ViewChild, Renderer2 } from '@angular/core';
+import { mainlyUseThunderConditional } from '../../../util/magicValues';
 
 @Component({
   selector: 'app-clouds',
@@ -20,7 +21,7 @@ export class CloudsComponent {
   
 
   ngAfterViewInit() {
-    if(this.lluvia > 0 || this.llovisna > 0) {
+    if(this.lluvia > 0 || this.llovisna > 1.0) {
       this.animacionLluvia();
     }
 
@@ -44,13 +45,18 @@ export class CloudsComponent {
   }
 
   animacionLluvia() {
-    if(this.weather_code === 95 || this.weather_code === 96 || this.weather_code === 99){
-      if(this.clouds){
-        this.renderer.addClass(this.clouds.nativeElement, 'thunderStatus');
-      }else{
-        console.error('clouds no encontrado');
+    
+    for(let i = 0; i < mainlyUseThunderConditional.length; i++) {
+      if(this.weather_code === mainlyUseThunderConditional[i]){
+        if(this.clouds){
+          this.renderer.addClass(this.clouds.nativeElement, 'thunderStatus');
+          break;
+        }else{
+          console.error('clouds no encontrado');
+        } 
       }
     }
+      
 
     if (typeof document !== 'undefined') {
       setInterval(() => {
