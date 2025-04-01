@@ -5,7 +5,7 @@ import { WeatherData } from '../../../util/interface';
   selector: 'app-bonsai',
   imports: [],
   templateUrl: './bonsai.component.html',
-  styleUrl: './bonsai.component.css'
+  styleUrl: './bonsai.component.scss'
 })
 export class BonsaiComponent {
   constructor(private renderer: Renderer2) { }
@@ -65,7 +65,7 @@ export class BonsaiComponent {
       this.renderer.appendChild(this.leaf.nativeElement, leaf);
       this.renderer.setStyle(leaf, 'left', Math.floor(Math.random() * 230) + 30 + 'px');
       setTimeout(() =>{
-        if (this.leaf) {
+        if (this.leaf && this.leaf.nativeElement.contains(leaf)) {
           this.leaf.nativeElement.removeChild(leaf);
         }
       }, 7000);

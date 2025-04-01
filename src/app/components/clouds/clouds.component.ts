@@ -5,7 +5,7 @@ import { mainlyUseThunderConditional } from '../../../util/magicValues';
   selector: 'app-clouds',
   imports: [],
   templateUrl: './clouds.component.html',
-  styleUrl: './clouds.component.css'
+  styleUrl: './clouds.component.scss'
 })
 export class CloudsComponent {
   constructor(private renderer: Renderer2) {}

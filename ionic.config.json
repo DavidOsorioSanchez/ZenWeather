@@ -1,0 +1,7 @@
+{
+  "name": "ZenWeatherApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

@@ -1,0 +1,30 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.App {
+    width: 100vw;
+    height: auto;
+    min-height: 100vh !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+}
+
+.main{
+    height: auto;
+    min-height: max-content;
+    display: flex;
+    flex-direction: column;
+}
+
+.Clouds {
+    width: 100vw;
+    position: absolute;
+    top: 0rem;
+    display: flex;
+    justify-content: center;
+}

@@ -1,13 +1,14 @@
 article{
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: fit-content;
     z-index: 10;
+    display:flex;
+    justify-content: center;
 }
 
 article .clouds {
     position: relative;
-    top: 100px;
+    top: 60px;
     width: 160px;
     height: 50px;
     background-color: #cecece;
@@ -42,7 +43,7 @@ article .clouds::after {
 
 article .drop {
     position: absolute;
-    top: 110px;
+    top: 70px;
     background-color: #3535eba9;
     width: 2px !important;
     height: 10px !important;
