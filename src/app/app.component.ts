@@ -1,19 +1,24 @@
 import { Component } from '@angular/core';
-import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
-import { WeatherData } from 'src/util/interface';
-import { ApiWeatherService } from './service/api/api-weather.service';
-import { mainlyUseCloudConditional } from 'src/util/magicValues';
+import { RouterOutlet } from '@angular/router';
 import { BonsaiComponent } from './components/bonsai/bonsai.component';
 import { CloudsComponent } from './components/clouds/clouds.component';
+import { ApiWeatherService } from './service/api/api-weather.service';
+import { WeatherData } from '../util/interface';
 import { CommonModule } from '@angular/common';
+import { mainlyUseCloudConditional } from '../util/magicValues';
+// import { MenuButtonComponent } from './components/menu-button/menu-button.component';
+
 
 @Component({
   selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['./app.component.scss'],
-  imports: [IonApp, BonsaiComponent, CloudsComponent, CommonModule],
+  // standalone: true,
+  imports: [RouterOutlet, BonsaiComponent, CloudsComponent, CommonModule],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  title = 'ZenWeather';
+
   
   public latitud: number | undefined;
   public longitud: number | undefined;
@@ -98,20 +103,20 @@ export class AppComponent {
   backgroundColor(){
     if(this.isDay === 1){
       if(this.weather_code === 0){
-        return "#00BFFF";
+        return "bg-[#00BFFF]";
       } else if(this.weather_code === 1 || 2 || 66){
-        return "#89CFF0";
+        return "bg-[#89CFF0]";
       } else if(this.weather_code === 3 || 4 || 67 || 80 || 81){
-        return "#A9A9A9";
+        return "bg-[#A9A9A9]";
       } else if( this.weather_code === 82 ){
-        return "#5238c2";
+        return "bg-[#5238c2]";
       } else if(this.weather_code === 85 || 86 ){
-        return "#dadada";
+        return "bg-[#dadada]";
       } else if(this.weather_code === 95 || 96 || 99){
-        return "#4a5565";
-      }else return "#ffffff";
+        return "bg-gray-600";
+      }else return "bg-white";
     } else {
-      return "#1e2939";
+      return "bg-gray-700";
     }
     // nublado = 3,
     // lluvia ligera = 66,
