@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-modal-location',
@@ -7,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrl: './modal-location.component.css'
 })
 export class ModalLocationComponent {
+  @Output() closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  constructor() {}
+  
+  setCloseModal(value: boolean) {
+    this.closeModal.emit(value);
+  }
 }

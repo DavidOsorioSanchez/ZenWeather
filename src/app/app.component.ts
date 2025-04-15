@@ -6,13 +6,14 @@ import { ApiWeatherService } from './service/api/api-weather.service';
 import { WeatherData } from '../util/interface';
 import { CommonModule } from '@angular/common';
 import { mainlyUseCloudConditional } from '../util/magicValues';
+import { ModalLocationComponent } from "./components/modal-location/modal-location.component";
 // import { MenuButtonComponent } from './components/menu-button/menu-button.component';
 
 
 @Component({
   selector: 'app-root',
   // standalone: true,
-  imports: [RouterOutlet, BonsaiComponent, CloudsComponent, CommonModule],
+  imports: [RouterOutlet, BonsaiComponent, CloudsComponent, CommonModule, ModalLocationComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -22,6 +23,7 @@ export class AppComponent {
   
   public latitud: number | undefined;
   public longitud: number | undefined;
+  public modal: boolean = false;
   temperatures: number[] | undefined;
   isDay: number = 0 | 1;
   datos: WeatherData | undefined;
@@ -45,13 +47,16 @@ export class AppComponent {
       navigator.geolocation.getCurrentPosition(
         (posicion) => {
           this.latitud = posicion.coords.latitude;
-          this.longitud = posicion.coords.longitude;     
+          this.longitud = posicion.coords.longitude;
+          this.modal = false;     
           this.getWeatherData();
           this.guardadoLocalstorage();
         },(error) => {
+          this.modal = true;
           this.error = error.message;
         });
     }else {
+      this.modal = true;
       this.error = 'Geolocalización no soportada';
     }
   }
@@ -79,6 +84,10 @@ export class AppComponent {
     }
   }
 
+  modalControlador(valor: boolean) {
+    this.modal = valor;
+  }
+  
   guardadoLocalstorage(){
     if (this.latitud !== undefined && this.longitud !== undefined) {
       localStorage.setItem('lat&lon', JSON.stringify({lat: this.latitud, lon: this.longitud}));

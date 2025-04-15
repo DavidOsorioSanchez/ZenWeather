@@ -1,1 +1,8 @@
-<p>modal-location works!</p>
+<article class="w-screen h-screen absolute z-50 top-0 left-0 flex justify-center items-center">
+    <button class="w-screen h-screen bg-black/45 absolute top-0 left-0" (click)="setCloseModal(false)">
+    </button>
+    <div class="bg-white/30 backdrop-blur-sm min-w-64 w-1/2 h-1/2 p-6 rounded-lg flex flex-col justify-center items-center gap-5">
+        <h1 class="text-2xl font-bold text-center">Geolocalización no soportada.</h1>
+        <p class="text-center">Por favor, permite la localización para poder ver la información meteorológica.</p>
+    </div>
+</article>

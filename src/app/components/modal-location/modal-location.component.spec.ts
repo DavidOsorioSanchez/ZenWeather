@@ -20,4 +20,5 @@ describe('ModalLocationComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
 });

@@ -1,5 +1,8 @@
+<!-- esto es el modal que aparece si no se permite la localización -->
+<app-modal-location *ngIf="modal" (closeModal)="modalControlador($event)"></app-modal-location>
+
 <!-- este es el efecto de lluvia -->
-<section *ngIf="mainlyUseClouds()" class="absolute z-50 top-0 left-0 w-full h-full flex justify-center items-start">
+<section *ngIf="mainlyUseClouds()" class="absolute z-30 top-0 left-0 w-full h-full flex justify-center items-start">
     <app-clouds 
         [weather_code]='this.weather_code' 
         [lluvia]='this.rain' 
