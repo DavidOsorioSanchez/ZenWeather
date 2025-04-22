@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SunComponent } from './sun.component';
+import { AstroComponent } from './astro.component';
 
-describe('SunComponent', () => {
-  let component: SunComponent;
-  let fixture: ComponentFixture<SunComponent>;
+describe('AstroComponent', () => {
+  let component: AstroComponent;
+  let fixture: ComponentFixture<AstroComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SunComponent]
+      imports: [AstroComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SunComponent);
+    fixture = TestBed.createComponent(AstroComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

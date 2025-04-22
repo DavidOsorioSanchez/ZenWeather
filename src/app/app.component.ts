@@ -7,13 +7,21 @@ import { WeatherData } from '../util/interface';
 import { CommonModule } from '@angular/common';
 import { mainlyUseCloudConditional } from '../util/magicValues';
 import { ModalLocationComponent } from "./components/modal-location/modal-location.component";
+import { AstroComponent } from "./components/astro/astro.component";
 // import { MenuButtonComponent } from './components/menu-button/menu-button.component';
 
 
 @Component({
   selector: 'app-root',
   // standalone: true,
-  imports: [RouterOutlet, BonsaiComponent, CloudsComponent, CommonModule, ModalLocationComponent],
+  imports: [
+      RouterOutlet,
+      BonsaiComponent, 
+      CloudsComponent, 
+      CommonModule, 
+      ModalLocationComponent, 
+      AstroComponent
+  ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -63,7 +71,7 @@ export class AppComponent {
 
   getWeatherData() {
     if (this.latitud !== undefined || this.longitud !== undefined) {
-      this.apiWeatherService.GetBonsaiData(this.latitud, this.longitud ).subscribe(
+      this.apiWeatherService.GetWeatherData(this.latitud, this.longitud ).subscribe(
         (response: Object) => {
           console.log('bonsai data:', response);
           this.datos = response as WeatherData;

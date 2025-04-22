@@ -1,10 +1,12 @@
 <article class="flex flex-col gap-5 justify-center items-center z-20" >
-    <h2 [class]='(this.isDay === 1 ? "text-gray-900" : "text-gray-100") + " text-xl font-semibold text-center"' >
+    <!-- <h2 
+        class="text-center text-2xl font-bold"
+    >
         {{ temperatures[hora] }} ºC
         {{ wind_speed_10m }} {{ wind_speed_10m_unit }}
-    </h2>
+    </h2>  -->
     <section class="relative" #leaf>
-        <svg viewBox="0 0 340 340" id="bonsai" xmlns="http://www.w3.org/2000/svg" fill="#000000" class="aspect-square object-cover w-full h-auto">
+        <svg viewBox="0 0 340 340" id="bonsai" mxlns="http://www.w3.org/2000/svg" fill="#000000" class="aspect-square object-cover w-full h-auto">
             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
             <g id="SVGRepo_iconCarrier">

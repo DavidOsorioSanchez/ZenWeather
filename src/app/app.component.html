@@ -1,22 +1,24 @@
 <!-- esto es el modal que aparece si no se permite la localización -->
 <app-modal-location *ngIf="modal" (closeModal)="modalControlador($event)"></app-modal-location>
 
-<!-- este es el efecto de lluvia -->
-<section *ngIf="mainlyUseClouds()" class="absolute z-30 top-0 left-0 w-full h-full flex justify-center items-start">
-    <app-clouds 
-        [weather_code]='this.weather_code' 
-        [lluvia]='this.rain' 
-        [nieve]='this.snow'
-        [llovisna]="this.showers"
-    >
+<main>
+    <!-- este es el astro que se ve en el cielo -->
+    <app-astro [cambio]="this.isDay"></app-astro>
 
-    </app-clouds>
-</section>
+    <!-- este es el efecto de lluvia -->
+    <section *ngIf="mainlyUseClouds()" class="absolute z-30 top-0 left-0 w-full h-full flex justify-center items-start">
+        <app-clouds [weather_code]='this.weather_code' [lluvia]='this.rain' [nieve]='this.snow'
+            [llovisna]="this.showers">
 
-<!-- este es el menu button
+        </app-clouds>
+    </section>
+
+    <!-- este es el menu button
 <app-menu-button *ngIf="true"></app-menu-button>  -->
 
-<main [class]='backgroundColor() + " w-full min-h-screen flex justify-center items-end py-6"'  >
-    <app-bonsai [datos]="datos" [mainlyUseLeafAnimation]="mainlyUseClouds()" ></app-bonsai>
+    <section [class]='backgroundColor() + " w-full min-h-screen flex justify-center items-end py-6"'>
+        <app-bonsai [datos]="datos" [mainlyUseLeafAnimation]="mainlyUseClouds()"></app-bonsai>
+    </section>
 </main>
+
 <router-outlet />

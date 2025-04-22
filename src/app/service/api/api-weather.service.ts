@@ -9,12 +9,8 @@ import { WeatherData } from '../../../util/interface';
 export class ApiWeatherService {
 
   constructor(private http: HttpClient) { }
-
-  GetWeatherData(latitud: number | undefined, longitud: number | undefined): Observable<Object> {
-    return this.http.get(`https://api.open-meteo.com/v1/forecast?latitude=6.2098&longitude=-75.5872&daily=daylight_duration,wind_direction_10m_dominant,rain_sum&hourly=visibility&current=is_day,showers,cloud_cover,wind_speed_10m,snowfall,wind_direction_10m,rain,weather_code,wind_gusts_10m&timezone=auto&forecast_days=1`);
-  }
   
-  GetBonsaiData(latitud: number | undefined, longitud: number | undefined): Observable<Object> {
+  GetWeatherData(latitud: number | undefined, longitud: number | undefined): Observable<Object> {
     return this.http.get(`https://api.open-meteo.com/v1/forecast?latitude=${latitud}&longitude=${longitud}&daily=daylight_duration,wind_direction_10m_dominant,rain_sum&hourly=visibility,temperature_2m&current=is_day,showers,cloud_cover,wind_speed_10m,snowfall,wind_direction_10m,rain,weather_code,wind_gusts_10m&timezone=auto&forecast_days=1`);
   }
   
