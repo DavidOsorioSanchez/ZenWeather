@@ -1,5 +1,8 @@
-<img 
-    [src]="cambio === 1 ? 'sun.svg' : 'moon.svg'"
-    alt="astro" 
-    class="absolute top-3 left-3 size-12 object-cover aspect-square" 
-/>
+<div class="relative !w-full h-auto p-5  top-0 left-0 z-40 bg-black" #astroContainer>
+    <img 
+        [src]="cambio === 1 ? 'sun.svg' : 'moon.svg'"
+        alt="astro" 
+        class="size-12 object-cover aspect-square absolute top-3" 
+        #astro
+    />
+</div>
