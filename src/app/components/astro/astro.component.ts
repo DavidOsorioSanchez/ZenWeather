@@ -19,7 +19,8 @@ export class AstroComponent {
     const hour = new Date().getHours();
 
     const position = (hour - 1) * (100 / 24); // 100% / 24 hours = 4.166666666666667% per hour
-    const roundedPosition = Math.round(position);
+    const roundedPosition = position === 0 ? 1 : Math.round(position);
+    console.log(roundedPosition);
     if (this.astro) {
       this.astro.nativeElement.style.left = roundedPosition + '%';
       this.astro.nativeElement.style.transform = 'translateX(-50%)';
