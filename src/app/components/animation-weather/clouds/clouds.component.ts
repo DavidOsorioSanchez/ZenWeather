@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, ViewChild, Renderer2 } from '@angular/core';
-import { mainlyUseThunderConditional } from '../../../util/magicValues';
+import { mainlyUseThunderConditional, MinLlovisnaAnimations, MinLluviaAnimations, MinNieveAnimations } from '../../../../util/magicValues';
 
 @Component({
   selector: 'app-clouds',
@@ -21,11 +21,15 @@ export class CloudsComponent {
   
 
   ngAfterViewInit() {
-    if(this.lluvia > 0 || this.llovisna > 1.0) {
-      this.animacionLluvia();
+    if(this.lluvia > MinLluviaAnimations || this.llovisna > MinLlovisnaAnimations) {
+      if(this.lluvia >= this.llovisna ) {
+        this.animacionLluvia(true);
+      }else{
+        this.animacionLluvia(false);
+      }
     }
 
-    if(this.nieve > 0) {
+    if(this.nieve > MinNieveAnimations) {
       this.animacionNieve();
     }
   }
@@ -44,7 +48,7 @@ export class CloudsComponent {
 
   }
 
-  animacionLluvia() {
+  animacionLluvia(EsLluvia: boolean) {
     
     for(let i = 0; i < mainlyUseThunderConditional.length; i++) {
       if(this.weather_code === mainlyUseThunderConditional[i]){
@@ -59,13 +63,20 @@ export class CloudsComponent {
       
 
     if (typeof document !== 'undefined') {
-      setInterval(() => {
-        this.rain();
-      }, 200);
+      if(EsLluvia) {
+        setInterval(() => {
+          this.rain(true);
+        }, 200);
+      }else{
+        setInterval(() => {
+          this.rain(false);
+        }, 2000);
+      }
+      
     }
   }
 
-  rain() {
+  rain(EsLluvia: boolean) {
     if (this.startWeatherAnimation) {
       const drop = this.renderer.createElement('div');
       this.renderer.addClass(drop, 'drop');
@@ -76,7 +87,7 @@ export class CloudsComponent {
         if (this.startWeatherAnimation) {
           this.startWeatherAnimation.nativeElement.removeChild(drop);
         }
-      }, 2000);
+      }, EsLluvia ? 2000 : 20000);
     }
   }
 }

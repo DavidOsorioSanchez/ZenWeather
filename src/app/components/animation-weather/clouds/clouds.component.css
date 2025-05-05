@@ -1,6 +1,6 @@
 article{
     position: relative;
-    width: 100%;
+    width: fit-content;
     height: 100%;
     z-index: 10;
 }
@@ -47,7 +47,7 @@ article .drop {
     width: 2px !important;
     height: 10px !important;
     transform-origin: bottom;
-    animation: dropfall 2s linear infinite;
+    animation: dropfall 2s linear;
 } 
 
 @keyframes dropfall {

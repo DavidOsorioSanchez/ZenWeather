@@ -27,4 +27,21 @@ describe('AppComponent', () => {
     expect(compiled.querySelector('h1')?.textContent).toContain('Hello, ZenWeather');
   });
 
+  it('debe llamar a getUserLocation al inicializar el componente', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    spyOn(app, 'getUserLocation');
+    app.ngOnInit();
+    expect(app.getUserLocation).toHaveBeenCalled();
+  });
+
+  it('debe verificar correctamente si el clima es principalmente nublado', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    spyOnProperty(app, 'weather_code', 'get').and.returnValue(3);
+    expect(app.mainlyUseClouds()).toBeTrue();
+    spyOnProperty(app, 'weather_code', 'get').and.returnValue(0);
+    expect(app.mainlyUseClouds()).toBeFalse();
+  });
+
 });

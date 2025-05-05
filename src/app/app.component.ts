@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { BonsaiComponent } from './components/bonsai/bonsai.component';
-import { CloudsComponent } from './components/clouds/clouds.component';
+import { BonsaiComponent } from './components/animation-weather/bonsai/bonsai.component';
+import { CloudsComponent } from './components/animation-weather/clouds/clouds.component';
 import { ApiWeatherService } from './service/api/api-weather.service';
 import { WeatherData } from '../util/interface';
 import { CommonModule } from '@angular/common';
 import { mainlyUseCloudConditional } from '../util/magicValues';
-import { ModalLocationComponent } from "./components/modal-location/modal-location.component";
-import { AstroComponent } from "./components/astro/astro.component";
+import { ModalLocationComponent } from "./components/UI/modal-location/modal-location.component";
+import { AstroComponent } from "./components/animation-weather/astro/astro.component";
+import { InformationDashboardComponent } from './components/UI/information-dashboard/information-dashboard.component';
 // import { MenuButtonComponent } from './components/menu-button/menu-button.component';
 
 
@@ -20,11 +21,13 @@ import { AstroComponent } from "./components/astro/astro.component";
       CloudsComponent, 
       CommonModule, 
       ModalLocationComponent, 
-      AstroComponent
+      AstroComponent,
+      InformationDashboardComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title = 'ZenWeather';
 

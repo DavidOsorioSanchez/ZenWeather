@@ -1,24 +1,38 @@
 <!-- esto es el modal que aparece si no se permite la localización -->
 <app-modal-location *ngIf="modal" (closeModal)="modalControlador($event)"></app-modal-location>
 
-<main>
-    <!-- este es el astro que se ve en el cielo -->
-    <app-astro [cambio]="this.isDay"></app-astro>
+<main [ngClass]="backgroundColor()" class="w-full flex flex-col justify-around items-center md:flex-row">
+    <!-- este es el contenedor principal -->
+    <section class="w-full min-h-[100vh] md:max-w-[65%]">
+        <!-- este es el astro que se ve en el cielo -->
+        <app-astro [cambio]="this.isDay"></app-astro>
 
-    <!-- este es el efecto de lluvia -->
-    <section *ngIf="mainlyUseClouds()" class="absolute z-30 top-0 left-0 w-full h-full flex justify-center items-start">
-        <app-clouds [weather_code]='this.weather_code' [lluvia]='this.rain' [nieve]='this.snow'
-            [llovisna]="this.showers">
 
-        </app-clouds>
+        <section class="w-full h-screen flex flex-col justify-between items-center relative">
+            <!-- este es el efecto de nubes -->
+            <div class="relative z-30 top-0 left-0 ">
+                <div *ngIf="mainlyUseClouds()">
+                    <app-clouds [weather_code]='this.weather_code' [lluvia]='this.rain' [nieve]='this.snow'
+                    [llovisna]="this.showers">
+
+                    </app-clouds>
+                </div>
+                
+            </div>
+
+            <!-- este es el contenedor donde se mostrara el arbol bonsai -->
+            <div class="w-full relative">
+                <app-bonsai [datos]="datos" [mainlyUseLeafAnimation]="mainlyUseClouds()"></app-bonsai>
+            </div>
+        </section>
     </section>
 
-    <!-- este es el menu button
-<app-menu-button *ngIf="true"></app-menu-button>  -->
-
-    <section [class]='backgroundColor() + " w-full min-h-screen flex justify-center items-end py-6"'>
-        <app-bonsai [datos]="datos" [mainlyUseLeafAnimation]="mainlyUseClouds()"></app-bonsai>
-    </section>
+    <!-- este es el contenedor donde se mostrara la información del clima de manera interactiva -->
+    <app-information-dashboard
+        [datos]="datos"
+    />
 </main>
+
+
 
 <router-outlet />

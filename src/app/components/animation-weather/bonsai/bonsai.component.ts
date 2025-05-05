@@ -1,5 +1,6 @@
 import { Component, Input, SimpleChanges, ViewChild, ElementRef, Renderer2, } from '@angular/core';
-import { WeatherData } from '../../../util/interface';
+import { WeatherData } from '../../../../util/interface';
+import { MinLlovisnaAnimations, MinLluviaAnimations, MinNieveAnimations, MinVientoAnimations } from '../../../../util/magicValues';
 
 @Component({
   selector: 'app-bonsai',
@@ -35,10 +36,10 @@ export class BonsaiComponent {
       this.isDay = this.datos.current.is_day;
 
       if(
-        this.wind_speed_10m >= 1.0 && 
-        this.datos.current.rain === 0 &&
-        this.datos.current.showers <= 1.0 && 
-        this.datos.current.snowfall === 0
+        this.wind_speed_10m >= MinVientoAnimations && 
+        this.datos.current.rain === MinLluviaAnimations &&
+        this.datos.current.showers <= MinLlovisnaAnimations && 
+        this.datos.current.snowfall === MinNieveAnimations
       ) {
         this.animacionDeHojas();
       }

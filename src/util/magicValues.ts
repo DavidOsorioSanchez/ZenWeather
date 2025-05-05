@@ -22,6 +22,10 @@ export const mainlyUseThunderConditional : Array<number> = [
     /* tormenta eléctrica con huracanes o tornados */ 99,
 ]
 
+export const MinLluviaAnimations : number = 0;
 
+export const MinNieveAnimations : number = 0;
 
+export const MinLlovisnaAnimations : number = 0;
 
+export const MinVientoAnimations : number = 1.0;
